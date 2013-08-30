@@ -72,11 +72,11 @@ Mat ScannerPy::ndarray2Mat(np::ndarray inarray) {
 
 namespace lsl = laser_scanning_library;
 
-BOOST_PYTHON_MODULE(liblaser_scanner_py)
+BOOST_PYTHON_MODULE(liblsrestore)
 {
     np::initialize();
 
     bp::class_<lsl::ScannerPy> scanner(
         "Scanner", bp::init<np::ndarray, np::ndarray, np::ndarray, np::ndarray, np::ndarray, np::ndarray>());
-    scanner.def("get_3d_coords", &lsl::ScannerPy::get3DCoords);
+    scanner.def("restore", &lsl::ScannerPy::get3DCoords);
 }

@@ -15,8 +15,8 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 # target_link_libraries( laser_scanner_cpp
 #   ${OpenCV_LIBS})
   
-add_library(laser_scanner_py SHARED scanner_py.cpp scanner.cpp)
-target_link_libraries( laser_scanner_py
+add_library(lsrestore SHARED scanner_py.cpp scanner.cpp)
+target_link_libraries( lsrestore
   ${OpenCV_LIBS}
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES})
