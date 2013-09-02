@@ -160,7 +160,8 @@ class Restore_original(object):
 
        
     def plot3d_line(self, p3d1, p3d2=None):
-        xs, ys, zs = np.hsplit(p3d1, 3)
+        data = np.hsplit(p3d1, p3d1.shape[-1])
+        xs, ys, zs = data[:3]
         xs = xs.reshape(xs.shape[0])
         ys = ys.reshape(ys.shape[0])
         zs = zs.reshape(ys.shape[0])
@@ -271,22 +272,28 @@ class Restore(object):
 
        
     def plot3d_line(self, p3d1):
-        xs, ys, zs = np.hsplit(p3d1, 3)
+        p3d1.shape = -1,  p3d1.shape[-1]
+        data = np.hsplit(p3d1, p3d1.shape[-1])
+        xs, ys, zs = data[:3]
         xs = xs.reshape(xs.shape[0])
         ys = ys.reshape(ys.shape[0])
         zs = zs.reshape(ys.shape[0])
         mpl.rcParams['legend.fontsize'] = 10
         fig = plt.figure(0)
         ax = fig.gca(projection='3d')
-        ax.plot(xs, ys, zs, label='3d plot of laserline')
+        ax.scatter(xs, ys, zs, label='3d plot of laserline')
         ax.legend()
         plt.show()
 
     def mplot3d(self, scan, show=False):
         from mayavi import mlab
         fig = mlab.figure(0)
-        scan.shape = (-1 , 3)
-        xs, ys, zs = np.hsplit(scan, 3)
+        scan.shape = (-1 , scan.shape[-1])
+        data = np.hsplit(scan, scan.shape[-1])
+        xs = data[0]
+        ys = data[1]
+        zs = data[2]
+        #xs, ys, zs = np.hsplit(scan, 3)
         xs.reshape(-1)
         ys.reshape(-1)
         zs.reshape(-1)
