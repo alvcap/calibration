@@ -41,7 +41,7 @@ np::ndarray ScannerPy::get3DCoords(np::ndarray arr) {
     xrange = Mat(range);
 
     xrange.col(0).copyTo(laserline2.col(0));
-    laserline2.col(1) = laserline.col(0) / 64.0;
+    laserline2.col(1) = laserline.col(0) / 32.0;
     laserline2 = laserline2.reshape(2, 0);
 
     p3ds_ = scanner_.get3DCoords(laserline2);

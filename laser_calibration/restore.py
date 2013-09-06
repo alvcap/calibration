@@ -10,7 +10,10 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
 import numpy as np
-import cv2
+try:
+    import cv2
+except:
+    print("Could not import cv2")
 
 class Restore_original(object):
     
@@ -258,7 +261,8 @@ class Restore(object):
         return ud
 
 
-    def plot3d(self, scan):
+    @staticmethod
+    def plot3d(scan):
         fig = plt.figure(0)
         ax = fig.gca(projection='3d')
         mpl.rcParams['legend.fontsize'] = 10
@@ -271,7 +275,8 @@ class Restore(object):
         plt.show()
 
        
-    def plot3d_line(self, p3d1):
+    @staticmethod
+    def plot3d_line(p3d1):
         p3d1.shape = -1,  p3d1.shape[-1]
         data = np.hsplit(p3d1, p3d1.shape[-1])
         xs, ys, zs = data[:3]
@@ -281,11 +286,12 @@ class Restore(object):
         mpl.rcParams['legend.fontsize'] = 10
         fig = plt.figure(0)
         ax = fig.gca(projection='3d')
-        ax.scatter(xs, ys, zs, label='3d plot of laserline')
+        ax.scatter(xs, ys, zs, marker=".", s=1, label='3d plot of laserline')
         ax.legend()
         plt.show()
 
-    def mplot3d(self, scan, show=False):
+    @staticmethod
+    def mplot3d(scan, show=False):
         from mayavi import mlab
         fig = mlab.figure(0)
         scan.shape = (-1 , scan.shape[-1])
@@ -301,7 +307,8 @@ class Restore(object):
         if show:
             mlab.show()
 
-    def save_point_cloud(self, scan, path='pc.ply'):
+    @staticmethod
+    def save_point_cloud(scan, path='pc.ply'):
         #from IPython import embed
         #embed()
         scan = scan[:,:,:3] # remove other data than position
