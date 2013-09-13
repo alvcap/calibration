@@ -22,7 +22,7 @@ class AravisCapture():
     def read(self):
         self.counter += 1
         print "trying to get frame: ", self.counter
-        frame = self.cam.get_frame(wait=True)
+        frame = self.cam.pop_frame()
         return True, frame
 
     def cleanup(self):
